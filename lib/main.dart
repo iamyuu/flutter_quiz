@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const App());
+void main() => runApp(App());
 
 // `extends StatelessWidget` => inheritance -> get all feature from parent class (`StatelessWidget`)
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  App({Key? key}) : super(key: key);
+
+  int currentQuestion = 0;
+
+  void answerQuestion() {
+    currentQuestion += 1;
+
+    // ignore: avoid_print
+    print('pressed ' + currentQuestion.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
-    // var questions = [
-    //   "What's your favorite color?",
-    //   "What's your favorite animal?",
-    // ];
+    List<String> questions = [
+      "What's your favorite color?",
+      "What's your favorite animal?",
+    ];
 
     return MaterialApp(
       home: Scaffold(
@@ -19,19 +28,19 @@ class App extends StatelessWidget {
           title: const Text('Quiz App'),
         ),
         body: Column(
-          children: const [
-            Text('The question:'),
+          children: [
+            Text(questions[currentQuestion]),
             ElevatedButton(
-              child: Text('Answer 1'),
-              onPressed: null,
+              child: const Text('Answer 1'),
+              onPressed: answerQuestion,
             ),
             ElevatedButton(
-              child: Text('Answer 2'),
-              onPressed: null,
+              child: const Text('Answer 2'),
+              onPressed: answerQuestion,
             ),
             ElevatedButton(
-              child: Text('Answer 3'),
-              onPressed: null,
+              child: const Text('Answer 3'),
+              onPressed: answerQuestion,
             ),
           ],
         ),
