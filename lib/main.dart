@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(App());
+void main() => runApp(const App());
 
-// `extends StatelessWidget` => inheritance -> get all feature from parent class (`StatelessWidget`)
-class App extends StatelessWidget {
-  App({Key? key}) : super(key: key);
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
 
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   int currentQuestion = 0;
 
   void answerQuestion() {
