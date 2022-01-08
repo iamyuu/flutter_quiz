@@ -10,13 +10,13 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int currentQuestion = 0;
+  int _currentQuestion = 0;
 
   void answerQuestion() {
-    currentQuestion += 1;
+    _currentQuestion += 1;
 
     // ignore: avoid_print
-    print('pressed ' + currentQuestion.toString());
+    print('pressed ' + _currentQuestion.toString());
   }
 
   @override
@@ -33,7 +33,7 @@ class _AppState extends State<App> {
         ),
         body: Column(
           children: [
-            Text(questions[currentQuestion]),
+            Text(questions[_currentQuestion]),
             ElevatedButton(
               child: const Text('Answer 1'),
               onPressed: answerQuestion,
