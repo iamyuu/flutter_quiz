@@ -16,46 +16,59 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int _questionIndex = 0;
 
+  final allQuestions = const [
+    {
+      'text': "What's your favorite color?",
+      'answers': ['Red', 'Green', 'Blue'],
+    },
+    {
+      'text': "What's your favorite animal?",
+      'answers': ['Cat', 'Dog'],
+    },
+    {
+      'text': "What's your favorite instuctor?",
+      'answers': ['Ken', 'Max', 'Angela', 'Andrei', 'Steele'],
+    },
+  ];
+
   void _answerQuestion() {
-    setState(() {
-      _questionIndex += 1;
-    });
+    if (_questionIndex < allQuestions.length) {
+      setState(() {
+        _questionIndex += 1;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    const allQuestions = [
-      {
-        'text': "What's your favorite color?",
-        'answers': ['Red', 'Green', 'Blue'],
-      },
-      {
-        'text': "What's your favorite animal?",
-        'answers': ['Cat', 'Dog'],
-      },
-      {
-        'text': "What's your favorite instuctor?",
-        'answers': ['Ken', 'Max', 'Angela', 'Andrei', 'Steele'],
-      },
-    ];
-
     // Dart thing `allQuestions[_questionIndex]` is `Object?`
     var currentText = allQuestions[_questionIndex]['text'].toString();
     var currentAnswers = allQuestions[_questionIndex]['answers'] as List<String>;
+
+    print({
+      // 'currentText': allQuestions[2],
+      '_questionIndex': _questionIndex + 1,
+      'allQuestions.length': allQuestions.length,
+      'bool': _questionIndex < allQuestions.length
+    });
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Quiz App'),
         ),
-        body: Column(
-          children: [
-            Question(currentText),
-            ...currentAnswers
-                .map((answer) => Answer(_answerQuestion, answer))
-                .toList()
-          ],
-        ),
+        body: _questionIndex < allQuestions.length
+            ? Column(
+                children: [
+                  Question(currentText),
+                  ...currentAnswers
+                      .map((answer) => Answer(_answerQuestion, answer))
+                      .toList()
+                ],
+              )
+            : const Center(
+                child: Text('is enough'),
+              ),
       ),
     );
   }
