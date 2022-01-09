@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
 void main() => runApp(const App());
 
@@ -15,8 +16,11 @@ class _AppState extends State<App> {
   void answerQuestion() {
     _currentQuestion += 1;
 
-    // ignore: avoid_print
-    print('pressed ' + _currentQuestion.toString());
+    // ignore: todo
+    // TODO: set state
+    // setState(() {
+    //   //
+    // });
   }
 
   @override
@@ -33,7 +37,7 @@ class _AppState extends State<App> {
         ),
         body: Column(
           children: [
-            Text(questions[_currentQuestion]),
+            Question(questions[_currentQuestion]),
             ElevatedButton(
               child: const Text('Answer 1'),
               onPressed: answerQuestion,
