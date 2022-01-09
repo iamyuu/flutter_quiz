@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print, todo, fixme
 
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(const App());
 
@@ -42,15 +42,9 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     // Dart thing `allQuestions[_questionIndex]` is `Object?`
-    var currentText = allQuestions[_questionIndex]['text'].toString();
-    var currentAnswers = allQuestions[_questionIndex]['answers'] as List<String>;
-
-    print({
-      // 'currentText': allQuestions[2],
-      '_questionIndex': _questionIndex + 1,
-      'allQuestions.length': allQuestions.length,
-      'bool': _questionIndex < allQuestions.length
-    });
+    var currentQuestion = allQuestions[_questionIndex]['text'].toString();
+    var currentAnswers =
+        allQuestions[_questionIndex]['answers'] as List<String>;
 
     return MaterialApp(
       home: Scaffold(
@@ -58,17 +52,8 @@ class _AppState extends State<App> {
           title: const Text('Quiz App'),
         ),
         body: _questionIndex < allQuestions.length
-            ? Column(
-                children: [
-                  Question(currentText),
-                  ...currentAnswers
-                      .map((answer) => Answer(_answerQuestion, answer))
-                      .toList()
-                ],
-              )
-            : const Center(
-                child: Text('is enough'),
-              ),
+            ? Quiz(currentQuestion, currentAnswers, _answerQuestion)
+            : const Result(),
       ),
     );
   }
