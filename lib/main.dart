@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(const App());
 
@@ -13,14 +14,10 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int _currentQuestion = 0;
 
-  void answerQuestion() {
-    _currentQuestion += 1;
-
-    // ignore: todo
-    // TODO: set state
-    // setState(() {
-    //   //
-    // });
+  void _answerQuestion() {
+    setState(() {
+      _currentQuestion += 1;
+    });
   }
 
   @override
@@ -38,18 +35,9 @@ class _AppState extends State<App> {
         body: Column(
           children: [
             Question(questions[_currentQuestion]),
-            ElevatedButton(
-              child: const Text('Answer 1'),
-              onPressed: answerQuestion,
-            ),
-            ElevatedButton(
-              child: const Text('Answer 2'),
-              onPressed: answerQuestion,
-            ),
-            ElevatedButton(
-              child: const Text('Answer 3'),
-              onPressed: answerQuestion,
-            ),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),
