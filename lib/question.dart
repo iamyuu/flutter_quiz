@@ -6,5 +6,15 @@ class Question extends StatelessWidget {
   const Question(this.questionText, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Text(questionText);
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.all(24),
+      child: Text(
+        questionText,
+        style: const TextStyle(fontSize: 28),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
 }
