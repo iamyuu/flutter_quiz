@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;
+  final VoidCallback resetHandler;
 
-  const Result(this.resultScore, {Key? key}) : super(key: key);
+  const Result(this.resultScore, this.resetHandler, {Key? key}) : super(key: key);
 
   String get resultPhrase {
     return 'is enough';
@@ -11,14 +12,22 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        // resultPhrase,
-        'is enough',
-        style: TextStyle(
-          fontSize: 36,
-          fontWeight: FontWeight.bold,
-        ),
+    return Center(
+      child: Column(
+        children: [
+          const Text(
+            // resultPhrase,
+            'is enough',
+            style: TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          TextButton(
+            onPressed: resetHandler,
+            child: const Text('reset'),
+          ),
+        ],
       ),
     );
   }

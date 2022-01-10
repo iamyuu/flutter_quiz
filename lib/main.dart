@@ -54,6 +54,13 @@ class _AppState extends State<App> {
     }
   }
 
+  void _resetQuiz() {
+    setState(() {
+      _totalScore = 0;
+      _questionIndex = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Dart thing `allQuestions[_questionIndex]` is `Object?`
@@ -68,7 +75,7 @@ class _AppState extends State<App> {
         ),
         body: _questionIndex < allQuestions.length
             ? Quiz(currentQuestion, currentAnswers, _answerQuestion)
-            : const Result(_totalScore),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
