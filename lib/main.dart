@@ -15,25 +15,40 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int _questionIndex = 0;
+  int _totalScore = 0;
 
   final allQuestions = const [
     {
       'text': "What's your favorite color?",
-      'answers': ['Red', 'Green', 'Blue'],
+      'answers': [
+        {'text': 'Red', 'score': 10},
+        {'text': 'Green', 'score': 10},
+        {'text': 'Blue', 'score': 10},
+      ],
     },
     {
       'text': "What's your favorite animal?",
-      'answers': ['Cat', 'Dog'],
+      'answers': [
+        {'text': 'Cat', 'score': 10},
+        {'text': 'Dog', 'score': 10},
+      ],
     },
     {
       'text': "What's your favorite instuctor?",
-      'answers': ['Ken', 'Max', 'Angela', 'Andrei', 'Steele'],
+      'answers': [
+        {'text': 'Ken', 'score': 10},
+        {'text': 'Max', 'score': 10},
+        {'text': 'Angela', 'score': 10},
+        {'text': 'Andrei', 'score': 10},
+        {'text': 'Steele', 'score': 10},
+      ],
     },
   ];
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     if (_questionIndex < allQuestions.length) {
       setState(() {
+        _totalScore += score;
         _questionIndex += 1;
       });
     }
@@ -44,7 +59,7 @@ class _AppState extends State<App> {
     // Dart thing `allQuestions[_questionIndex]` is `Object?`
     var currentQuestion = allQuestions[_questionIndex]['text'].toString();
     var currentAnswers =
-        allQuestions[_questionIndex]['answers'] as List<String>;
+        allQuestions[_questionIndex]['answers'] as List<Map<String, Object>>;
 
     return MaterialApp(
       home: Scaffold(
@@ -53,7 +68,7 @@ class _AppState extends State<App> {
         ),
         body: _questionIndex < allQuestions.length
             ? Quiz(currentQuestion, currentAnswers, _answerQuestion)
-            : const Result(),
+            : const Result(_totalScore),
       ),
     );
   }
